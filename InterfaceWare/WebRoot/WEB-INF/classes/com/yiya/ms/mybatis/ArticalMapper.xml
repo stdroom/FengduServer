@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiya.ms.mapper.ArticalMapper" > 
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.yiya.model.ArticalModel" >
+<result column="article_id" property="articleid"/>
+	<result column="title" property="title"/>
+	<result column="contxtpath" property="contxtpath"/>
+	<result column="contexthtml" property="contexthtml"/>
+	<result column="cata_id" property="cataid"/>
+	<result column="fromurl" property="fromurl"/>
+	<result column="pagenum" property="pagenum"/>
+	<result column="created_at" property="createdat"/>
+	<result column="updateed_at" property="updateedat"/>
+	<result column="imgpath" property="imgpath"/>
+	<result column="author" property="author"/>
+	<result column="contextsummary" property="contextsummary"/>
+	<result column="tags" property="tags"/>
+	<result column="t1" property="t1"/>
+	<result column="t2" property="t2"/>
+	<result column="v1" property="v1"/>
+	<result column="v2" property="v2"/>
+	<result column="i1" property="i1"/>
+	<result column="i2" property="i2"/>
+</resultMap>
+       
+<!-- site_column table all fields -->
+<sql id="Base_Column_List" >
+	 articleid,title,contxtpath,contexthtml,cataid,fromurl,pagenum,createdat,updateedat,imgpath,author,contextsummary,tags,t1,t2,v1,v2,i1,i2
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="articleid != ''" >
+	    and article_id =  #{articleid}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="com.yiya.model.ArticalModel" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into ArticleBean(id,siteId,name,link,pic)
+ values(#{id},#{siteId},#{name},#{link},#{pic})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="com.yiya.model.ArticalModel">
+  update article set article_id=#{articleid},name=#{name},link=#{link},pic=#{pic} where article_id=#{articleid}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="com.yiya.model.ArticalModel" >
+	update ArticleBean set 
+	<trim  suffixOverrides="," >
+	<if test="siteId != ''  ">
+		siteId=#{siteId},
+	</if>
+	<if test="name != null  and name != '' ">
+		name=#{name},
+	</if>
+	<if test="link != null  and link != '' ">
+		link=#{link},
+	</if>
+	<if test="pic != null  and pic != '' ">
+		pic=#{pic},
+	</if>
+	</trim> where id=#{id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from ArticleBean where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 站点栏目 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="com.yiya.model.ArticalModel">
+	select <include refid="Base_Column_List" /> 
+	 from ArticleBean where id = #{id}
+</select>
+
+<!-- 站点栏目 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="com.yiya.model.ArticalModel">
+	select count(1) from ArticleBean 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询站点栏目列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="com.yiya.model.ArticalModel">
+	select 
+	<include refid="Base_Column_List"/>
+	from ArticleBean
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+
+
+<!-- 根据站点id查询栏目 -->
+<select id="queryBySiteId"  resultMap="BaseResultMap" parameterType="com.yiya.model.ArticalModel">
+	select <include refid="Base_Column_List" /> 
+	 from ArticleBean where siteId = #{siteId}
+</select>
+  	
+</mapper>   
