@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>  
+    <class name="com.demo.model.models.Account" table="account" lazy="false">  
+
+		<id name="id" column="id" type="integer" >
+		  <generator class="native" />
+		</id>
+		
+		<version name="version" column="version" type="integer"/>
+		<property name="enable" column="enable" type="boolean" not-null="true"/>
+		<property name="name" column="name" type="string" not-null="true"/>
+		<property name="email" column="email" type="string" not-null="true"/>	
+		<property name="username" column="username" type="string" not-null="true" unique="true"/>
+		<property name="password" column="password" type="string" not-null="true"/>
+		<property name="registerTime" column="registerTime" type="calendar" not-null="true"/>
+		<many-to-one name ="role" class="com.demo.model.models.Role" foreign-key="FK_account_role" index="IDX_account_roleId">
+		  <column name="roleId" not-null="false"/>
+		</many-to-one>
+		<many-to-one name ="organization" class="com.demo.model.models.Organization" foreign-key="FK_account_organization" index="IDX_account_organizationId">
+		  <column name="organizationId" not-null="false"/>
+		</many-to-one>
+
+    </class>  
+</hibernate-mapping> 
