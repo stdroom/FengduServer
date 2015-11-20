@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.demo.service.interfaces.IAccountService;
 import com.demo.service.interfaces.IAuthorityService;
+import com.demo.service.interfaces.IImageService;
 import com.demo.service.interfaces.IOrganizationService;
 import com.demo.service.interfaces.IRoleService;
 
@@ -31,6 +32,10 @@ public abstract class BaseController {
 	@Autowired
     @Qualifier("OrganizationService")
 	protected IOrganizationService organizationService;
+	
+	@Autowired
+	@Qualifier("ImageService")
+	protected IImageService imageService;
 	
 	@ExceptionHandler  
     public String exception(HttpServletRequest request, Exception e) {  
