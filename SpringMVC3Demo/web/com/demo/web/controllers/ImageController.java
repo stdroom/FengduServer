@@ -32,6 +32,8 @@ import com.demo.service.interfaces.IImageService;
 import com.demo.service.services.ImageService;
 import com.infrastructure.project.common.utilities.PageList;
 
+import utils.StringCompress;
+
 /**
  * ����: ImageController <br/>
  * ����: TODO ��ӹ�������. <br/>
@@ -64,7 +66,7 @@ public class ImageController extends BaseController{
 			map.put("size", list.size());
 		}
 		map.put("data", list);
-		return JSON.toJSONString(map);
+		return StringCompress.compress(JSON.toJSONString(map));
 	}
 	
 }
