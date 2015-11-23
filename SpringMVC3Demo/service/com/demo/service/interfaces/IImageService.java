@@ -26,6 +26,6 @@ import com.infrastructure.project.common.utilities.PageList;
  */
 public interface IImageService extends IEnableEntityService<Integer, Image, IImageDao>{
 
-	PageList<Image> listPage(String name, int pageNo, int pageSize);
+	PageList<Image> listPage(int cataid,int appid, int pageNo, int pageSize);
 }
 

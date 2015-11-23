@@ -74,5 +74,8 @@
         <property name="title" type="java.lang.String">
             <column name="title" />
         </property>
+        <many-to-one name ="catalog" class="com.demo.model.models.Catalog" foreign-key="image_ibfk_1">
+		  <column name="cata_id" not-null="false"/>
+		</many-to-one>
     </class>
 </hibernate-mapping>

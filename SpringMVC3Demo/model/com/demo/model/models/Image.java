@@ -77,6 +77,8 @@ public class Image extends EnableEntity<Integer> implements ICUDEable{
 	
 	private String title;
 	
+	Catalog catalog;
+	
 	public Image(){
 	}
 
@@ -254,6 +256,14 @@ public class Image extends EnableEntity<Integer> implements ICUDEable{
 
 	public void setFavor(Integer favor) {
 		this.favor = favor;
+	}
+
+	public Catalog getCatalog() {
+		return catalog;
+	}
+
+	public void setCatalog(Catalog catalog) {
+		this.catalog = catalog;
 	}
 	
 }

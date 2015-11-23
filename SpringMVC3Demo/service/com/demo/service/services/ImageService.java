@@ -44,15 +44,18 @@ public class ImageService extends EnableEntityService<Integer, Image, IImageDao>
 	}
 
 	@Override
-	public PageList<Image> listPage(String name, int pageNo, int pageSize) {
+	public PageList<Image> listPage(int cataid,int appid,int pageNo, int pageSize) {
 		Criteria countCriteria = entityDao.getCriteria();	
 		Criteria listCriteria = entityDao.getCriteria();
 		
-//		if(name!=null && !name.isEmpty()){
-//			countCriteria.add(Restrictions.eq("name", name)); 
-//    		listCriteria.add(Restrictions.eq("name", name)); 
-//		}
-
+		if(cataid > 0 ){
+			Criteria ct = countCriteria.createCriteria("AppColumn");
+			ct.add(arg0)
+			countCriteria.add(Restrictions.eq("cata_id", cataid)); 
+			System.out.println(cataid+"");
+    		listCriteria.add(Restrictions.eq("cata_id", cataid)); 
+		}
+		
         listCriteria.setFirstResult((pageNo-1)*pageSize);  
         listCriteria.setMaxResults(pageSize);
         List<Image> items = listCriteria.list();

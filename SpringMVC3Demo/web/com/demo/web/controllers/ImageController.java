@@ -51,9 +51,9 @@ public class ImageController extends BaseController{
 	
 	@RequestMapping(value="/getImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String getImages(@RequestParam("page") int page,@RequestParam("pageSize") int pageSize){
+	public String getImages(@RequestParam("page") int page,@RequestParam("cataid") int cataid,@RequestParam("pageSize") int pageSize){
 		
-		PageList<Image> items = imageService.listPage("", page, pageSize);
+		PageList<Image> items = imageService.listPage(cataid,0, page, pageSize);
 		ArrayList<Image> list= (ArrayList<Image>) items.getItems();
 		Map<String,Object> map = new HashMap<String,Object>();
 		for(Image ben:list){
