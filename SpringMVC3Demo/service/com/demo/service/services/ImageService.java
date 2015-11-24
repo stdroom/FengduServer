@@ -15,6 +15,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -49,8 +50,7 @@ public class ImageService extends EnableEntityService<Integer, Image, IImageDao>
 		Criteria listCriteria = entityDao.getCriteria();
 		
 		if(cataid > 0 ){
-			Criteria ct = countCriteria.createCriteria("AppColumn");
-			ct.add(arg0)
+			Criteria ct = countCriteria.createCriteria("appColumn",JoinType.LEFT_OUTER_JOIN);
 			countCriteria.add(Restrictions.eq("cata_id", cataid)); 
 			System.out.println(cataid+"");
     		listCriteria.add(Restrictions.eq("cata_id", cataid)); 

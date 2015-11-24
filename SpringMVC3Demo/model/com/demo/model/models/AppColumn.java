@@ -26,6 +26,9 @@ public class AppColumn extends EnableEntity<Integer> implements ICUDEable{
 	Integer columnid = 0;
 	Catalog catalog;
 
+	public AppColumn(){
+	}
+
 	public Integer getAppid() {
 		return appid;
 	}
@@ -40,14 +43,6 @@ public class AppColumn extends EnableEntity<Integer> implements ICUDEable{
 
 	public void setColumnid(Integer columnid) {
 		this.columnid = columnid;
-	}
-
-	public Integer getCataid() {
-		return cataid;
-	}
-
-	public void setCataid(Integer cataid) {
-		this.cataid = cataid;
 	}
 
 	public Catalog getCatalog() {

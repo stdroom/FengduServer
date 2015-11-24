@@ -22,6 +22,8 @@ import com.infrastructure.project.base.model.models.EnableEntity;
  */
 public class Catalog extends EnableEntity<Integer> implements ICUDEable{
 
+	public Catalog(){
+	}
 	
 }
 

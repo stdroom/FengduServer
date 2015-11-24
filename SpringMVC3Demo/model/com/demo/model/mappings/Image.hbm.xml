@@ -77,5 +77,8 @@
         <many-to-one name ="catalog" class="com.demo.model.models.Catalog" foreign-key="image_ibfk_1">
 		  <column name="cata_id" not-null="false"/>
 		</many-to-one>
+		<many-to-one name ="appColumn" class="com.demo.model.models.AppColumn" fech="join">
+		  <column name="appColumn" not-null="false"/>
+		</many-to-one>
     </class>
 </hibernate-mapping>

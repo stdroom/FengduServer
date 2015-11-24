@@ -79,6 +79,8 @@ public class Image extends EnableEntity<Integer> implements ICUDEable{
 	
 	Catalog catalog;
 	
+	AppColumn appColumn;
+	
 	public Image(){
 	}
 
@@ -264,6 +266,14 @@ public class Image extends EnableEntity<Integer> implements ICUDEable{
 
 	public void setCatalog(Catalog catalog) {
 		this.catalog = catalog;
+	}
+
+	public AppColumn getAppColumn() {
+		return appColumn;
+	}
+
+	public void setAppColumn(AppColumn appColumn) {
+		this.appColumn = appColumn;
 	}
 	
 }
