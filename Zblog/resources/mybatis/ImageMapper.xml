@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zblog.core.dal.mapper.ImageMapper">
+   
+   <select id="loadByIntId" parameterType="java.lang.Integer" resultType="Image">  
+      select cata_id,title, pageNum,thumbNail,width,height,imgPaths,srcImgPaths,yunImgPaths,thumbSrc,thumbYun from image where id = #{id}
+   </select>
+   
+   <select id="list" parameterType="PageModel" resultType="Image">  
+       select cata_id,title, pageNum,thumbNail,width,height,imgPaths,srcImgPaths,yunImgPaths,thumbSrc,thumbYun from image
+   </select>
+   
+   <select id="count" resultType="long">
+     select count(*) from image
+   </select>
+   
+   <insert id="insert" parameterType="Image">
+      insert into image(id,nickName,realName,password,email,role,status,description,createTime,creator,lastUpdate) 
+         values(#{id},#{nickName},#{realName},md5(#{password}),#{email},#{role},#{status},#{description},#{createTime},#{creator},#{lastUpdate})
+   </insert>
+   
+   <update id="update" parameterType="User">
+     update user set realName=#{realName},email=#{email},description=#{description}
+     <if test="role!=null and role!=''">
+        ,role=#{role}
+     </if>
+     <if test="password!=null and password!=''">
+       ,password=md5(#{password})
+     </if>
+     where id=#{id}
+   </update>
+
+   <delete id="deleteById">
+	 delete from user where id = #{id}
+  </delete>
+	
+</mapper>

@@ -10,18 +10,8 @@
  *
 */
 
-package com.demo.model.models;
+package com.zblog.core.dal.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import org.hibernate.annotations.Table;
-
-import com.infrastructure.project.base.model.interfaces.ICUDEable;
-import com.infrastructure.project.base.model.models.EnableEntity;
-import com.infrastructure.project.base.model.models.SimpleEntity;
 
 /**
  * ����: Image <br/>
@@ -31,7 +21,7 @@ import com.infrastructure.project.base.model.models.SimpleEntity;
  * @author   leixun
  * @version  	 
  */
-public class Image extends EnableEntity<Integer> implements ICUDEable{
+public class Image extends BaseEntity{
 	
 	private String contextPath = "";
 	
@@ -52,16 +42,16 @@ public class Image extends EnableEntity<Integer> implements ICUDEable{
 	private String exception = "";
 	
 	
-	// ���� ·��
+	// 本地图片路径
 	private String imgPaths = "";
-	// ԭʼ·��
+	// 原始图片路径
 	private String srcImgpaths = "";
-	// �ƴ洢·��
+	// 云盘图片路径
 	private String yunImgPaths = "";
 	
-	// ԭʼ·��
+	// 缩略图本地图片路径
 	private String thumbSrc = "";
-	// �ƴ洢·��
+	// 云盘缩略图路径
 	private String thumbYun = "";
 	// ����·��
 	private String thumbNail = "";
