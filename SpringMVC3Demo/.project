@@ -3,8 +3,6 @@
 	<name>SpringMVC3Demo</name>
 	<comment></comment>
 	<projects>
-		<project>InfrastructureProjects</project>
-		<project>WeiXinAPI</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

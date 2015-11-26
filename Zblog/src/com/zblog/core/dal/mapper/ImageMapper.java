@@ -27,6 +27,8 @@ public interface ImageMapper extends BaseMapper {
 
 	public Image loadByIntId(Integer id);
 	
-	public ArrayList<Image> getImageListByColumn(PageModel<Image> model,int cataId);
+	public ArrayList<Image> getImageListByColumn(PageModel<Image> model);
+	
+	public ArrayList<Image> getImageListBySearch(PageModel<Image> model);
 }
 

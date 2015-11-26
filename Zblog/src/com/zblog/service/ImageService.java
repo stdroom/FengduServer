@@ -47,11 +47,17 @@ public class ImageService extends BaseService{
 		return imageMapper;
 	}
 	
-	public ArrayList<Image> getImageListByColumn(PageModel<Image> model,int cataId){
-		ArrayList<Image> list = imageMapper.getImageListByColumn(model, cataId);
+	public ArrayList<Image> getImageListByColumn(PageModel<Image> model){
+		ArrayList<Image> list = imageMapper.getImageListByColumn(model);
 		model.setContent(list);
 		return list;
-	  }
+	}
+	
+	public ArrayList<Image> getImageListBySearch(PageModel<Image> model){
+		ArrayList<Image> list = imageMapper.getImageListBySearch(model);
+		model.setContent(list);
+		return list;
+	}
 
 }
 

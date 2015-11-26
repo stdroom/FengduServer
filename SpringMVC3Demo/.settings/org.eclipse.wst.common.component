@@ -8,12 +8,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/model"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/utils"/>
-        <dependent-module archiveName="InfrastructureProjects.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/InfrastructureProjects/InfrastructureProjects">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="WeiXinAPI.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/WeiXinAPI/WeiXinAPI">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="SpringMVC3Demo"/>
         <property name="java-output-path" value="/SpringMVC3Demo/build/classes"/>
     </wb-module>

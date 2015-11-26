@@ -4,12 +4,26 @@
 
 <mapper namespace="com.zblog.core.dal.mapper.ImageMapper">
    
-   <select id="loadByIntId" parameterType="java.lang.Integer" resultType="Image">  
-      select cata_id,title, pageNum,thumbNail,width,height,imgPaths,srcImgPaths,yunImgPaths,thumbSrc,thumbYun from image where id = #{id}
+    <sql id="select_statements">
+        cata_id,title, pageNum,thumbNail,width,height,imgPaths,srcImgPaths,yunImgPaths,thumbSrc,thumbYun
+    </sql>
+    
+   <select id="loadByIntId" parameterType="java.lang.Integer" resultType="Image">
+      select <include refid="select_statements"/> from image where id = #{id}
+   </select>
+
+   <select id="getImageListByColumn" parameterType="PageModel" resultType="Image">
+       select <include refid="select_statements"/> from image left join appcolumn on image.cata_id=appcolumn.cataid 
+       where appcolumn.columnid=#{query.columnid} and appcolumn.enable=1 and appcolumn.appid=#{query.appid}
    </select>
    
-   <select id="list" parameterType="PageModel" resultType="Image">  
-       select cata_id,title, pageNum,thumbNail,width,height,imgPaths,srcImgPaths,yunImgPaths,thumbSrc,thumbYun from image
+   <select id="getImageListBySearch" parameterType="PageModel" resultType="Image">
+       select <include refid="select_statements"/> from image left join appcolumn on image.cata_id=appcolumn.cataid 
+       where appcolumn.appid=#{query.appid} and appcolumn.enable=1 and image.title like #{query.keyname}
+   </select>
+   
+   <select id="list" parameterType="PageModel" resultType="Image">
+       select <include refid="select_statements"/> from image
    </select>
    
    <select id="count" resultType="long">
