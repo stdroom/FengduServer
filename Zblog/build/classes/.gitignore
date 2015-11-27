@@ -1,5 +1,9 @@
-/generatorConfig.xml
-/config/
-/testconfig/
+/IKAnalyzer.cfg.xml
 /com/
+/config/
+/dic/
+/generatorConfig.xml
+/jdbc.properties
+/log4j.properties
 /mybatis/
+/testconfig/

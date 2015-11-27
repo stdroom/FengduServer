@@ -15,6 +15,7 @@
     <typeAlias alias="Comment" type="com.zblog.core.dal.entity.Comment" />
     <typeAlias alias="Option" type="com.zblog.core.dal.entity.Option" />
     <typeAlias alias="Image" type="com.zblog.core.dal.entity.Image" />
+    <typeAlias alias="PhoneUser" type="com.zblog.core.dal.entity.PhoneUser" />
     
     <typeAlias alias="PostVO" type="com.zblog.service.vo.PostVO" />
     <typeAlias alias="PageVO" type="com.zblog.service.vo.PageVO" />
@@ -31,5 +32,6 @@
     <mapper resource="mybatis/OptionMapper.xml" />
     <mapper resource="mybatis/TagMapper.xml" />
     <mapper resource="mybatis/ImageMapper.xml" />
+    <mapper resource="mybatis/PhoneUserMapper.xml" />
   </mappers>
 </configuration>

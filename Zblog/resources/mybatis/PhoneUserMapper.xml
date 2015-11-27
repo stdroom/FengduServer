@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zblog.core.dal.mapper.PhoneUserMapper">
+   
+    <sql id="select_statements">
+        appversion,phone_type,imei,osversion,lang,client_type,appid,date,httpcount,timestamp
+    </sql>
+    
+   <select id="loadByIntId" parameterType="java.lang.Integer" resultType="PhoneUser">
+      select <include refid="select_statements"/> from image where id = #{id}
+   </select>
+   
+   <select id="loadByPhoneUser" parameterType="PhoneUser" resultType="PhoneUser">
+      select <include refid="select_statements"/> from image where imei=#{imei} and appid=#{appid} and timestamp=#{timestamp}
+   </select>
+
+   <select id="list" parameterType="PageModel" resultType="PhoneUser">
+       select <include refid="select_statements"/> from phone_user
+   </select>
+   
+   <select id="count" resultType="long">
+     select count(*) from phone_user
+   </select>
+   
+   <insert id="insert" parameterType="PhoneUser">
+      insert into phone_user(<include refid="select_statements"/>) 
+         values(#{appversion},#{phone_type},#{imei},#{osversion},#{lang},#{client_type},#{appid},#{date},#{httpcount},#{timestamp})
+   </insert>
+   
+   <update id="update" parameterType="PhoneUser">
+     update user set httpcount=#{httpcount}
+     where imei=#{imei} and appid=#{appid} and timestamp=#{timestamp}
+   </update>
+
+   <delete id="deleteById">
+	 delete from user where id = #{id}
+  </delete>
+	
+</mapper>

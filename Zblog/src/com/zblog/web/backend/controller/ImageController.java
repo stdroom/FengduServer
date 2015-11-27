@@ -10,11 +10,13 @@
 package com.zblog.web.backend.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,10 +47,10 @@ public class ImageController {
 	
 	@RequestMapping(value="/getImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String getImages(@RequestHeader("appid") String appid,@RequestParam("page") int page,@RequestParam("cataid") int cataid,@RequestParam("pageSize") int pageSize){
+	public String getImages(@RequestHeader HttpHeaders headers, @RequestParam("page") int page,@RequestParam("cataid") int cataid,@RequestParam("pageSize") int pageSize){
 		PageModel<Image> pageModel = imageService.list(page, pageSize);
 		pageModel.insertQuery("columnid", cataid);
-		pageModel.insertQuery("appid", Integer.parseInt(appid));
+		pageModel.insertQuery("appid", Integer.parseInt(headers.getFirst("appid")));
 		imageService.getImageListByColumn(pageModel);
 		ArrayList<Image> list= (ArrayList<Image>) pageModel.getContent();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -61,27 +63,22 @@ public class ImageController {
 		}else{
 			map.put("size", list.size());
 		}
+		
 		map.put("data", list);
 		return StringCompress.compress(JSON.toJSONString(map));
 	}
 	
 	@RequestMapping(value="/searchImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String searchImages(@RequestParam("keyname") String keyname, @RequestParam("page") int page,@RequestParam("pageSize") int pageSize){
+	public String searchImages(@RequestHeader("appid") String appid,@RequestParam("keyname") String keyname, @RequestParam("page") int page,@RequestParam("pageSize") int pageSize){
 		PageModel<Image> pageModel = imageService.list(page, pageSize);
-		pageModel.insertQuery("appid", Integer.parseInt("102601"));
-		byte bb[];
+		pageModel.insertQuery("appid", Integer.parseInt(appid));
 	    try {
+	    	keyname = URLDecoder.decode(keyname,"UTF-8");
 	    	System.out.println(keyname);
-			bb = keyname.getBytes("ISO-8859-1");
-			keyname= new String(bb, "UTF-8");
-			System.out.println(keyname);
 		} catch (UnsupportedEncodingException e) {
-			
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
-		} //以"ISO-8859-1"方式解析name字符串
+		}
 		pageModel.insertQuery("keyname", "%"+keyname+"%");
 		imageService.getImageListBySearch(pageModel);
 		ArrayList<Image> list= (ArrayList<Image>) pageModel.getContent();
