@@ -12,6 +12,8 @@
 
 package com.zblog.core.dal.entity;
 
+import java.util.Date;
+
 /**
  * ����: Image <br/>
  * ����: . <br/>
@@ -67,6 +69,8 @@ public class Image extends BaseEntity{
 	private Integer pageNum;
 	
 	private String title;
+	
+	private Date updateed_at;
 	
 	public Image(){
 	}
@@ -245,6 +249,14 @@ public class Image extends BaseEntity{
 
 	public void setEnable(Boolean enable) {
 		this.enable = enable;
+	}
+
+	public Date getUpdateed_at() {
+		return updateed_at;
+	}
+
+	public void setUpdateed_at(Date updateed_at) {
+		this.updateed_at = updateed_at;
 	}
 }
 

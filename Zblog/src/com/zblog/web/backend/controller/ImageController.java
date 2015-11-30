@@ -11,7 +11,9 @@ package com.zblog.web.backend.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +53,7 @@ public class ImageController {
 		PageModel<Image> pageModel = imageService.list(page, pageSize);
 		pageModel.insertQuery("columnid", cataid);
 		pageModel.insertQuery("appid", Integer.parseInt(headers.getFirst("appid")));
+		pageModel.insertQuery("timestamp",new Date());
 		imageService.getImageListByColumn(pageModel);
 		ArrayList<Image> list= (ArrayList<Image>) pageModel.getContent();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -73,6 +76,8 @@ public class ImageController {
 	public String searchImages(@RequestHeader("appid") String appid,@RequestParam("keyname") String keyname, @RequestParam("page") int page,@RequestParam("pageSize") int pageSize){
 		PageModel<Image> pageModel = imageService.list(page, pageSize);
 		pageModel.insertQuery("appid", Integer.parseInt(appid));
+		pageModel.insertQuery("timestamp",new Date());
+		System.out.println(new Date());
 	    try {
 	    	keyname = URLDecoder.decode(keyname,"UTF-8");
 	    	System.out.println(keyname);
