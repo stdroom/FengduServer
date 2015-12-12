@@ -21,6 +21,8 @@ import com.zblog.core.dal.entity.PhoneUser;
  */
 public interface PhoneUserMapper extends BaseMapper{
 
-	public PhoneUser loadByPhoneUser(PhoneUser phoneUser);
+	public PhoneUser loadByPhoneUser(int id);
+	
+	public void inserPhoneUser(PhoneUser phoneUser);
 }
 

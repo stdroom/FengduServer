@@ -35,34 +35,34 @@ public class MyHeaderInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		System.out.println("开始了来来来来来来来");
-		PhoneUser phoneUser = new PhoneUser();
-		String appid = request.getHeader("appid");
-		String osversion = request.getHeader("osversion");
-		String client_type = request.getHeader("client_type");
-		String imei = request.getHeader("imei");
-		String lang = request.getHeader("lang");
-		String phone_type = request.getHeader("phone_type");
-		String timestamp = request.getHeader("timestamp");
-		phoneUser.setAppid(Integer.parseInt(appid));
-		phoneUser.setOsversion(osversion);
-		phoneUser.setClient_type(client_type);
-		phoneUser.setImei(imei);
-		phoneUser.setLang(lang);
-		phoneUser.setPhone_type(phone_type);
-		phoneUser.setTimestamp(timestamp);
-		phoneUser.setDate(new Date());
-		phoneUser.setHttpcount(1);
-		System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
-		PhoneUser result = phoneUserService.loadByPhoneUser(phoneUser);
-		if(result!=null){
-			int httpcount = result.getHttpcount()+1;
-			result.setHttpcount(httpcount);
-			phoneUserService.update(result);
-		}else{
-			phoneUserService.insert(phoneUser);
-		}
-		System.out.println("test");
+//		System.out.println("开始了来来来来来来来");
+//		PhoneUser phoneUser = new PhoneUser();
+//		String appid = request.getHeader("appid");
+//		String osversion = request.getHeader("osversion");
+//		String client_type = request.getHeader("client_type");
+//		String imei = request.getHeader("imei");
+//		String lang = request.getHeader("lang");
+//		String phone_type = request.getHeader("phone_type");
+//		String timestamp = request.getHeader("timestamp");
+//		phoneUser.setAppid(Integer.parseInt(appid));
+//		phoneUser.setOsversion(osversion);
+//		phoneUser.setClient_type(client_type);
+//		phoneUser.setImei(imei);
+//		phoneUser.setLang(lang);
+//		phoneUser.setPhone_type(phone_type);
+//		phoneUser.setTimestamp(timestamp);
+//		phoneUser.setDate(new Date());
+//		phoneUser.setHttpcount(1);
+//		System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+////		PhoneUser result = phoneUserService.loadByPhoneUser(phoneUser);
+//		if(result!=null){
+//			int httpcount = result.getHttpcount()+1;
+//			result.setHttpcount(httpcount);
+//			phoneUserService.update(result);
+//		}else{
+//			phoneUserService.insert(phoneUser);
+//		}
+//		System.out.println("test");
 		return super.preHandle(request, response, handler);
 	}
 

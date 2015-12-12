@@ -36,9 +36,13 @@ public class PhoneUserService extends BaseService{
 		return phoneUserMapper;
 	}
 
-	public PhoneUser loadByPhoneUser(PhoneUser phoneUser){
-		PhoneUser temp = phoneUserMapper.loadByPhoneUser(phoneUser);
+	public PhoneUser loadByPhoneUser(int id){
+		PhoneUser temp = phoneUserMapper.loadByPhoneUser(id);
 		return temp;
+	}
+	
+	public void inserPhoneUser(PhoneUser phoneUser){
+		
 	}
 }
 
