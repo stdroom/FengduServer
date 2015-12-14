@@ -5,7 +5,7 @@
 <mapper namespace="com.zblog.core.dal.mapper.PhoneUserMapper">
    
     <sql id="select_statements">
-        appversion,phone_type,imei,osversion,lang,client_type,appid,date,httpcount,timestamp
+        appversion,phone_type,imei,osversion,lang,client_type,appid,httpcount,timestamp
     </sql>
     
    <select id="loadByIntId" parameterType="java.lang.Integer" resultType="PhoneUser">
@@ -13,7 +13,7 @@
    </select>
    
    <select id="loadByPhoneUser" parameterType="int" resultType="PhoneUser">
-      select <include refid="select_statements"/> from phone_user where id=#{id}
+      select <include refid="select_statements"/> from phone_user where iid=#{id}
    </select>
 
    <select id="list" parameterType="PageModel" resultType="PhoneUser">
@@ -25,15 +25,14 @@
    </select>
    
    <insert id="insert" parameterType="PhoneUser">
-      insert into phone_user(<include refid="select_statements"/>) 
-         values(#{appversion},#{phone_type},#{imei},#{osversion},#{lang},#{client_type},#{appid},#{date},#{httpcount},#{timestamp})
+      insert into phone_user(<include refid="select_statements"/>,iid) 
+         values(#{appversion},#{phone_type},#{imei},#{osversion},#{lang},#{client_type},#{appid},#{httpcount},#{timestamp},#{iid})
    </insert>
    
    <insert id="inserPhoneUser" parameterType="PhoneUser">
-      insert into phone_user(id,<include refid="select_statements"/>) 
-         values(#{id},#{appversion},#{phone_type},#{imei},#{osversion},#{lang},#{client_type},#{appid},#{date},#{httpcount},#{timestamp})
+      insert into phone_user(id,<include refid="select_statements"/>)
+         values(#{id},#{appversion},#{phone_type},#{imei},#{osversion},#{lang},#{client_type},#{appid},#{httpcount},#{timestamp})
    </insert>
-   
    
    <update id="update" parameterType="PhoneUser">
      update user set httpcount=#{httpcount}
