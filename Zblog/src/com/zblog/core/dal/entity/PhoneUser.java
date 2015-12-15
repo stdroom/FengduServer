@@ -21,7 +21,7 @@ import java.util.Date;
  */
 public class PhoneUser extends BaseEntity{
 
-	int iid;
+	Integer iid;
 	/** app版本 */
 	Integer appversion ;
 	/** 手机型号 */
@@ -101,10 +101,10 @@ public class PhoneUser extends BaseEntity{
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getIid() {
+	public Integer getIid() {
 		return iid;
 	}
-	public void setIid(int iid) {
+	public void setIid(Integer iid) {
 		this.iid = iid;
 	}
 }
