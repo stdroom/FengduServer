@@ -47,6 +47,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <typeAlias alias="UploadVO" type="com.zblog.service.vo.UploadVO" />
     <typeAlias alias="Image" type="com.zblog.core.dal.entity.Image" />
 	<typeAlias alias="PhoneUser" type="com.zblog.core.dal.entity.PhoneUser" />
+	<typeAlias alias="Favor" type="com.zblog.core.dal.entity.Favor"/>
 	</typeAliases>
 	
 	<!-- 和spring整合后 environments配置将废除-->
@@ -75,6 +76,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <mapper resource="mybatis/TagMapper.xml" />
     <mapper resource="mybatis/ImageMapper.xml" />
 	<mapper resource="mybatis/PhoneUserMapper.xml" />
+	<mapper resource="mybatis/FavorMapper.xml" />
 		<!--通过resource方法一次加载一个映射文件 -->
 		<!-- <mapper resource="mapper/UserMapper.xml"/> -->
 		

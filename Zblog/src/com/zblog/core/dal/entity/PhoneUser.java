@@ -23,7 +23,7 @@ public class PhoneUser extends BaseEntity{
 
 	int iid;
 	/** app版本 */
-	Integer appversion ;
+	String appversion ;
 	/** 手机型号 */
 	String phone_type;
 	/** 手机imei */
@@ -41,10 +41,10 @@ public class PhoneUser extends BaseEntity{
 	Integer httpcount;
 	/** 时间戳 用于判断是否为同一次的请求 */
 	String timestamp;
-	public Integer getAppversion() {
+	public String getAppversion() {
 		return appversion;
 	}
-	public void setAppversion(Integer appversion) {
+	public void setAppversion(String appversion) {
 		this.appversion = appversion;
 	}
 	public String getPhone_type() {

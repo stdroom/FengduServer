@@ -27,9 +27,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.zblog.core.dal.entity.Favor;
 import com.zblog.core.dal.entity.Image;
 import com.zblog.core.plugin.PageModel;
 import com.zblog.core.util.StringCompress;
+import com.zblog.service.FavorService;
 import com.zblog.service.ImageService;
 
 /**
@@ -46,6 +48,9 @@ public class ImageController {
 
 	@Autowired
 	private ImageService imageService;
+	
+	@Autowired
+	FavorService favorService;
 	
 	@RequestMapping(value="/getImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
 	@ResponseBody
@@ -99,6 +104,47 @@ public class ImageController {
 		}
 		map.put("data", list);
 		return StringCompress.compress(JSON.toJSONString(map));
+	}
+	
+	@RequestMapping(value="/favorImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String favorImage(@RequestHeader HttpHeaders headers, @RequestParam Integer imgId , 
+			@RequestParam boolean isFavor){
+		Favor favor = new Favor();
+		favor.setAppid(Integer.parseInt(headers.getFirst("appid")));
+		favor.setImei(headers.getFirst("imei"));
+		favor.setCreateTime(new Date());
+		favor.setUpdateTime(new Date());
+		favor.setEnable(isFavor);
+		favor.setFavorId(imgId);
+		if(isFavor){
+			favorService.updateFavor(favor);
+		}else{
+			favorService.insertFavor(favor);
+		}                                                                     
+		return "";
+	}
+	
+	@RequestMapping(value="/isFavorImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String isfavorImage(@RequestHeader HttpHeaders headers, @RequestParam Integer imgId){
+		Favor favor = new Favor();
+		favor.setAppid(Integer.parseInt(headers.getFirst("appid")));
+		favor.setImei(headers.getFirst("imei"));
+		favor.setCreateTime(new Date());
+		favor.setUpdateTime(new Date());
+		favor.setFavorId(imgId);
+		Favor result = favorService.findFavorByImeiImgId(favor);
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(result == null){
+			map.put("status", 200);
+			map.put("isFavor", false);
+			return JSON.toJSONString(map);
+		}else{
+			map.put("status", 200);
+			map.put("isFavor", result.getEnable());
+			return JSON.toJSONString(map);
+		}
 	}
 }
 
