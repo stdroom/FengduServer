@@ -63,7 +63,7 @@ public class ImageController {
 		ArrayList<Image> list= (ArrayList<Image>) pageModel.getContent();
 		Map<String,Object> map = new HashMap<String,Object>();
 		for(Image ben:list){
-			System.out.println(ben.getCata_id()+ben.getTitle());
+			System.out.println(ben.getCata_id());
 		}
 		map.put("status", 1);
 		if(list== null || list.size()==0){
@@ -75,6 +75,7 @@ public class ImageController {
 		map.put("data", list);
 		return StringCompress.compress(JSON.toJSONString(map));
 	}
+	
 	
 	@RequestMapping(value="/searchImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
 	@ResponseBody
@@ -94,7 +95,7 @@ public class ImageController {
 		ArrayList<Image> list= (ArrayList<Image>) pageModel.getContent();
 		Map<String,Object> map = new HashMap<String,Object>();
 		for(Image ben:list){
-			System.out.println(ben.getCata_id()+ben.getTitle());
+			System.out.println(ben.getCata_id());
 		}
 		map.put("status", 1);
 		if(list== null || list.size()==0){
@@ -108,43 +109,85 @@ public class ImageController {
 	
 	@RequestMapping(value="/favorImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String favorImage(@RequestHeader HttpHeaders headers, @RequestParam Integer imgId , 
-			@RequestParam boolean isFavor){
+	public String favorImage(@RequestHeader HttpHeaders headers, @RequestParam String imgId , 
+			@RequestParam(required=false) Boolean isFavor,@RequestParam(required=false) Boolean report){
 		Favor favor = new Favor();
 		favor.setAppid(Integer.parseInt(headers.getFirst("appid")));
 		favor.setImei(headers.getFirst("imei"));
 		favor.setCreateTime(new Date());
 		favor.setUpdateTime(new Date());
 		favor.setEnable(isFavor);
-		favor.setFavorId(imgId);
-		if(isFavor){
-			favorService.updateFavor(favor);
-		}else{
+		favor.setReported(report);
+		favor.setFavorId(Integer.parseInt(imgId));
+		Favor result = favorService.findFavorByImeiImgId(favor);
+		if(result==null || "".equals(result.getImei())){
 			favorService.insertFavor(favor);
-		}                                                                     
-		return "";
+		}else{
+			favor.setReaded(result.getReaded());
+			if(isFavor!=null){
+				favor.setEnable(isFavor);
+			}else{
+				favor.setEnable(result.getEnable());
+			}
+			if(report!=null){
+				favor.setReported(report);
+			}else{
+				favor.setReported(result.getReported());
+			}
+			favorService.updateFavor(favor);
+		}        
+		Map<String,Object> map = new HashMap<String,Object>();
+			map.put("status", 200);
+		return StringCompress.compress(JSON.toJSONString(map));
 	}
 	
 	@RequestMapping(value="/isFavorImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String isfavorImage(@RequestHeader HttpHeaders headers, @RequestParam Integer imgId){
+	public String isfavorImage(@RequestHeader HttpHeaders headers, @RequestParam String imgId){
 		Favor favor = new Favor();
 		favor.setAppid(Integer.parseInt(headers.getFirst("appid")));
 		favor.setImei(headers.getFirst("imei"));
 		favor.setCreateTime(new Date());
 		favor.setUpdateTime(new Date());
-		favor.setFavorId(imgId);
+		favor.setFavorId(Integer.parseInt(imgId));
 		Favor result = favorService.findFavorByImeiImgId(favor);
 		Map<String,Object> map = new HashMap<String,Object>();
 		if(result == null){
 			map.put("status", 200);
-			map.put("isFavor", false);
-			return JSON.toJSONString(map);
+			map.put("isFavor", null);
+			favor.setReaded(true);
+			favor.setEnable(false);
+			favorService.insertFavor(favor);
+			return StringCompress.compress(JSON.toJSONString(map));
 		}else{
 			map.put("status", 200);
-			map.put("isFavor", result.getEnable());
-			return JSON.toJSONString(map);
+			map.put("isFavor", result);
+			return StringCompress.compress(JSON.toJSONString(map));
 		}
+	}
+	
+	@RequestMapping(value="/getFavorImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String getFavorImages(@RequestHeader HttpHeaders headers, @RequestParam("page") int page,@RequestParam("pageSize") int pageSize){
+		PageModel<Image> pageModel = imageService.list(page, pageSize);
+		pageModel.insertQuery("appid", Integer.parseInt(headers.getFirst("appid")));
+		pageModel.insertQuery("imei", headers.getFirst("imei"));
+		pageModel.insertQuery("timestamp",new Date());
+		imageService.getImageListByColumn(pageModel);
+		ArrayList<Image> list= (ArrayList<Image>) pageModel.getContent();
+		Map<String,Object> map = new HashMap<String,Object>();
+		for(Image ben:list){
+			System.out.println(ben.getCata_id());
+		}
+		map.put("status", 1);
+		if(list== null || list.size()==0){
+			map.put("size", 0);
+		}else{
+			map.put("size", list.size());
+		}
+		
+		map.put("data", list);
+		return StringCompress.compress(JSON.toJSONString(map));
 	}
 }
 

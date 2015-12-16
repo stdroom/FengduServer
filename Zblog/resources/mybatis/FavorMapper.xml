@@ -5,21 +5,21 @@
 <mapper namespace="com.zblog.core.dal.mapper.FavorMapper">
    
     <sql id="select_statements">
-        imei,imgId,favorTime,enable,appid
+        imei,favorId,createTime,enable,appid,readed
     </sql>
 
    <select id="findFavorByImeiImgId" parameterType="Favor" resultType="Favor">
        select <include refid="select_statements"/> from favor_img where 
-       imei=#{imei} and appid=#{appid} and imgId=#{imgId}
+       imei=#{imei} and appid=#{appid} and favorId=#{favorId}
    </select>
    
    <insert id="insertFavor" parameterType="Favor">
       insert into favor_img(<include refid="select_statements"/>) 
-         values(#{imei},#{imgId},#{favorTime},#{enable},#{appid})
+         values(#{imei},#{favorId},#{createTime},#{enable},#{appid},#{readed})
    </insert>
    
    <update id="updateFavor" parameterType="Favor">
-     update favor_img set enable=#{enable}
-     where imei=#{imei} and appid=#{appid} and imgId=#{imgId}
+     update favor_img set enable=#{enable} ,readed=#{readed},reported=#{reported}
+     where imei=#{imei} and appid=#{appid} and favorId=#{favorId}
    </update>
 </mapper>

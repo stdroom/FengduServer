@@ -34,6 +34,10 @@ public class Favor {
 	Date updateTime;
 	/*是否有效*/
 	Boolean enable;
+	/**是否阅读 */
+	Boolean readed;
+	/** 是否举报*/
+	Boolean reported;
 	
 	public String getImei() {
 		return imei;
@@ -76,6 +80,18 @@ public class Favor {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public Boolean getReaded() {
+		return readed;
+	}
+	public void setReaded(Boolean readed) {
+		this.readed = readed;
+	}
+	public Boolean getReported() {
+		return reported;
+	}
+	public void setReported(Boolean reported) {
+		this.reported = reported;
 	}
 }
 

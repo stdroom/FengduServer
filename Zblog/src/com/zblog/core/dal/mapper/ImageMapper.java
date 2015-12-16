@@ -31,5 +31,7 @@ public interface ImageMapper extends BaseMapper {
 	
 	public ArrayList<Image> getImageListBySearch(PageModel<Image> model);
 	
+	public ArrayList<Image> getFavorImageList(PageModel<Image> model);
+	
 }
 

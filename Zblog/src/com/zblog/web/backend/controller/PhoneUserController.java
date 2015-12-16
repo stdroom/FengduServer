@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zblog.core.dal.entity.PhoneUser;
+import com.zblog.core.util.StringCompress;
 import com.zblog.service.FavorService;
 import com.zblog.service.PhoneUserService;
 
@@ -55,8 +56,16 @@ public class PhoneUserController {
 		phoneUser.setPhone_type(headers.getFirst("phone_type"));
 		phoneUser.setTimestamp(headers.getFirst("timestamp"));
 		phoneUser.setClient_type(headers.getFirst("client_type"));
+		
+		phoneUser.setAddress(headers.getFirst("address"));
+		phoneUser.setCity(headers.getFirst("city"));
+		phoneUser.setCountry(headers.getFirst("country"));
+		phoneUser.setDistrict(headers.getFirst("district"));
+		phoneUser.setProvince(headers.getFirst("province"));
+		phoneUser.setLatitude(headers.getFirst("latitude"));
+		phoneUser.setLongitude(headers.getFirst("longitude"));
 		System.out.println("ssssssssssssssssssss");
-		return phoneUserService.insert(phoneUser)+"";
+		return StringCompress.compress(phoneUserService.insert(phoneUser)+"");
 	}
 	
 	// 收藏信息

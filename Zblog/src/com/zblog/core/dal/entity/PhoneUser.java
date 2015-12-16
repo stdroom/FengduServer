@@ -41,6 +41,21 @@ public class PhoneUser extends BaseEntity{
 	Integer httpcount;
 	/** 时间戳 用于判断是否为同一次的请求 */
 	String timestamp;
+	
+	// 经度
+	String longitude = "";
+	// 纬度
+	String latitude = "";
+	//国家
+	String country = "";
+	// 省
+	String province = "";
+	// 市
+	String city = "";
+	// 区
+	String district = "";
+	// 地址
+	String address = "";
 	public String getAppversion() {
 		return appversion;
 	}
@@ -106,6 +121,48 @@ public class PhoneUser extends BaseEntity{
 	}
 	public void setIid(int iid) {
 		this.iid = iid;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getDistrict() {
+		return district;
+	}
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }
 

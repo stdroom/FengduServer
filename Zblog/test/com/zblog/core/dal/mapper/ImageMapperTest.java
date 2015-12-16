@@ -48,18 +48,18 @@ private SqlSessionFactory sqlSessionFactionFactory;
 		}
 	}
 	
-	public void testLoadById() {
-		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
-		ImageMapper userMapper = sqlSession.getMapper(ImageMapper.class);
-		Image user = userMapper.loadByIntId(102);
-		System.out.println(user.getTitle()
-				+"\n"+user.getContextHtml()
-				+"\n"+user.getThumbNail()
-				+"\n"+user.getPageNum()
-				);
-		assertEquals(user.getCata_id(), new Integer(1106));
-		
-	}
+//	public void testLoadById() {
+//		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
+//		ImageMapper userMapper = sqlSession.getMapper(ImageMapper.class);
+//		Image user = userMapper.loadByIntId(102);
+//		System.out.println(user.getTitle()
+//				+"\n"+user.getContextHtml()
+//				+"\n"+user.getThumbNail()
+//				+"\n"+user.getPageNum()
+//				);
+//		assertEquals(user.getCata_id(), new Integer(1106));
+//		
+//	}
 //
 //	public void testListPageModelOfT() {
 //		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
@@ -78,14 +78,13 @@ private SqlSessionFactory sqlSessionFactionFactory;
 //		}
 //		
 //	}
-	public void testListPageSearch() {
+	public void testFavorListPageSearch() {
 		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
 		ImageMapper userMapper = sqlSession.getMapper(ImageMapper.class);
 		PageModel<Image> model = new PageModel<>(1,10);
 		model.insertQuery("appid", 102601);
-		model.insertQuery("keyname", "%美女%");
-		model.setContent(userMapper.list(model));
-		model.setContent(userMapper.getImageListBySearch((model)));
+		model.insertQuery("imei", "353490067655544");
+		model.setContent(userMapper.getFavorImageList((model)));
 		ArrayList<Image> list = (ArrayList<Image>)model.getContent();
 		for(int i = 0 ;i < list.size();i++){
 			
@@ -95,12 +94,29 @@ private SqlSessionFactory sqlSessionFactionFactory;
 		assertEquals(list.size(), 91);
 		
 	}
+//	public void testListPageSearch() {
+//		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
+//		ImageMapper userMapper = sqlSession.getMapper(ImageMapper.class);
+//		PageModel<Image> model = new PageModel<>(1,10);
+//		model.insertQuery("appid", 102601);
+//		model.insertQuery("keyname", "%美女%");
+//		model.setContent(userMapper.list(model));
+//		model.setContent(userMapper.getFavorImageList((model)));
+//		ArrayList<Image> list = (ArrayList<Image>)model.getContent();
+//		for(int i = 0 ;i < list.size();i++){
+//			
+//			System.out.println(list.get(i).getCata_id()+list.get(i).getTitle()
+//					);
+//		}
+//		assertEquals(list.size(), 91);
+//		
+//	}
 
-	public void testCount() {
-		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
-		ImageMapper userMapper = sqlSession.getMapper(ImageMapper.class);
-		assertEquals(userMapper.count(),493);
-	}
+//	public void testCount() {
+//		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
+//		ImageMapper userMapper = sqlSession.getMapper(ImageMapper.class);
+//		assertEquals(userMapper.count(),493);
+//	}
 
 }
 
