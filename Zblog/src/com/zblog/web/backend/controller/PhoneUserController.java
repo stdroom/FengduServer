@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fengdu.android.AppConstant;
-import com.mike.aframe.utils.SystemTool;
 import com.zblog.core.dal.entity.PhoneUser;
 import com.zblog.service.PhoneUserService;
 
