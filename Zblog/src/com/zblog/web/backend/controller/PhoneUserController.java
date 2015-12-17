@@ -12,6 +12,8 @@
 
 package com.zblog.web.backend.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,13 +59,14 @@ public class PhoneUserController {
 		phoneUser.setTimestamp(headers.getFirst("timestamp"));
 		phoneUser.setClient_type(headers.getFirst("client_type"));
 		
-		phoneUser.setAddress(headers.getFirst("address"));
-		phoneUser.setCity(headers.getFirst("city"));
-		phoneUser.setCountry(headers.getFirst("country"));
-		phoneUser.setDistrict(headers.getFirst("district"));
-		phoneUser.setProvince(headers.getFirst("province"));
+		phoneUser.setAddress(decodeUtf8(headers.getFirst("address")));
+		phoneUser.setCity(decodeUtf8(headers.getFirst("city")));
+		phoneUser.setCountry(decodeUtf8(headers.getFirst("country")));
+		phoneUser.setDistrict(decodeUtf8(headers.getFirst("district")));
+		phoneUser.setProvince(decodeUtf8(headers.getFirst("province")));
 		phoneUser.setLatitude(headers.getFirst("latitude"));
 		phoneUser.setLongitude(headers.getFirst("longitude"));
+		phoneUser.setChannel(decodeUtf8(headers.getFirst("channel")));
 		System.out.println("ssssssssssssssssssss");
 		return StringCompress.compress(phoneUserService.insert(phoneUser)+"");
 	}
@@ -78,7 +81,16 @@ public class PhoneUserController {
 		
 	}
 	
-	
+	private String decodeUtf8(String str){
+		try {
+			if(!"".equals(str)){
+				str = URLDecoder.decode(str,"UTF-8");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return str;
+	}
 	
 }
 

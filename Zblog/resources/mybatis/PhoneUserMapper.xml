@@ -6,7 +6,7 @@
    
     <sql id="select_statements">
         appversion,phone_type,imei,osversion,lang,client_type,date,appid,httpcount,timestamp
-        ,address,city,district,country,province,latitude,longitude
+        ,address,city,district,country,province,latitude,longitude,channel
     </sql>
     
    <select id="loadByIntId" parameterType="java.lang.Integer" resultType="PhoneUser">
@@ -29,7 +29,7 @@
       insert into phone_user(<include refid="select_statements"/>) 
          values(#{appversion},#{phone_type},#{imei},#{osversion},#{lang},
          #{client_type},#{date},#{appid},#{httpcount},#{timestamp}
-         ,#{address},#{city},#{district},#{country},#{province},#{latitude},#{longitude})
+         ,#{address},#{city},#{district},#{country},#{province},#{latitude},#{longitude},#{channel})
    </insert>
    
    <insert id="inserPhoneUser" parameterType="PhoneUser">

@@ -56,6 +56,8 @@ public class PhoneUser extends BaseEntity{
 	String district = "";
 	// 地址
 	String address = "";
+	// 渠道
+	String channel = "";
 	public String getAppversion() {
 		return appversion;
 	}
@@ -163,6 +165,12 @@ public class PhoneUser extends BaseEntity{
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getChannel() {
+		return channel;
+	}
+	public void setChannel(String channel) {
+		this.channel = channel;
 	}
 }
 

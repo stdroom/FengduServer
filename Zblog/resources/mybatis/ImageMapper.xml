@@ -25,7 +25,7 @@
    </select>
    <select id="getFavorImageList" parameterType="PageModel" resultType="Image">
        select <include refid="select_statements"/> from image,favor_img
-       where favor_img.imei=#{query.imei} and favor_img.favorId=image.iid
+       where favor_img.imei=#{query.imei} and favor_img.favorId=image.iid and favor_img.enable=1
    	   order by updateed_at desc
    </select>
    

@@ -173,7 +173,7 @@ public class ImageController {
 		pageModel.insertQuery("appid", Integer.parseInt(headers.getFirst("appid")));
 		pageModel.insertQuery("imei", headers.getFirst("imei"));
 		pageModel.insertQuery("timestamp",new Date());
-		imageService.getImageListByColumn(pageModel);
+		imageService.getFavorImageList(pageModel);
 		ArrayList<Image> list= (ArrayList<Image>) pageModel.getContent();
 		Map<String,Object> map = new HashMap<String,Object>();
 		for(Image ben:list){
