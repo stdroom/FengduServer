@@ -55,10 +55,10 @@ private SqlSessionFactory sqlSessionFactionFactory;
 		PhoneUserMapper userMapper = sqlSession.getMapper(PhoneUserMapper.class);
 		int i = 1;
 		PhoneUser phoneUser = new PhoneUser();
-		phoneUser.setIid(4);
+		phoneUser.setIid(6);
 		phoneUser.setId("2");
 		phoneUser.setAppid(233);
-		phoneUser.setAppversion(233);
+		phoneUser.setAppversion("233");
 		phoneUser.setDate(new Date());
 		phoneUser.setImei("imei");
 		phoneUser.setOsversion("osversion");
@@ -69,13 +69,13 @@ private SqlSessionFactory sqlSessionFactionFactory;
 		phoneUser.setHttpcount(23);
 		userMapper.insert(phoneUser);
 		sqlSession.commit();
-//		PhoneUser user = userMapper.loadByPhoneUser(2);
-//		System.out.println(user.getClient_type()
-//				+"\n"+user.getImei()
-//				+"\n"+user.getPhone_type()
-//				+"\n"+user.getAppid()
-//				);
-//		assertEquals(user.getAppid(), new Integer(233));
+		PhoneUser user = userMapper.loadByPhoneUser(5);
+		System.out.println(user.getClient_type()
+				+"\n"+user.getImei()
+				+"\n"+user.getPhone_type()
+				+"\n"+user.getAppid()
+				);
+		assertEquals(user.getAppid(), new Integer(233));
 	}
 //
 //	public void testListPageModelOfT() {

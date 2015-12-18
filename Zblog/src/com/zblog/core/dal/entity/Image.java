@@ -24,6 +24,8 @@ import java.util.Date;
  */
 public class Image extends BaseEntity{
 	
+	private Integer iid = 0;
+	
 	private Boolean enable = false;
 	
 	private String contextPath = "";
@@ -258,5 +260,14 @@ public class Image extends BaseEntity{
 	public void setUpdateed_at(Date updateed_at) {
 		this.updateed_at = updateed_at;
 	}
+
+	public Integer getIid() {
+		return iid;
+	}
+
+	public void setIid(Integer iid) {
+		this.iid = iid;
+	}
+
 }
 

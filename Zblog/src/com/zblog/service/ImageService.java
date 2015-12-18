@@ -58,6 +58,13 @@ public class ImageService extends BaseService{
 		model.setContent(list);
 		return list;
 	}
+	
+	public ArrayList<Image> getFavorImageList(PageModel<Image> model){
+		ArrayList<Image> list = imageMapper.getFavorImageList(model);
+		model.setContent(list);
+		return list;
+	}
+	
 
 }
 

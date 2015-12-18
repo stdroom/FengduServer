@@ -5,7 +5,8 @@
 <mapper namespace="com.zblog.core.dal.mapper.PhoneUserMapper">
    
     <sql id="select_statements">
-        appversion,phone_type,imei,osversion,lang,client_type,appid,httpcount,timestamp
+        appversion,phone_type,imei,osversion,lang,client_type,date,appid,httpcount,timestamp
+        ,address,city,district,country,province,latitude,longitude,channel
     </sql>
     
    <select id="loadByIntId" parameterType="java.lang.Integer" resultType="PhoneUser">
@@ -25,13 +26,15 @@
    </select>
    
    <insert id="insert" parameterType="PhoneUser">
-      insert into phone_user(appversion,phone_type,imei,iid) 
-         values(#{appversion},#{phone_type},#{imei},#{iid})
+      insert into phone_user(<include refid="select_statements"/>) 
+         values(#{appversion},#{phone_type},#{imei},#{osversion},#{lang},
+         #{client_type},#{date},#{appid},#{httpcount},#{timestamp}
+         ,#{address},#{city},#{district},#{country},#{province},#{latitude},#{longitude},#{channel})
    </insert>
    
    <insert id="inserPhoneUser" parameterType="PhoneUser">
       insert into phone_user(id,<include refid="select_statements"/>)
-         values(#{id},#{appversion},#{phone_type},#{imei},#{osversion},#{lang},#{client_type},#{appid},#{httpcount},#{timestamp})
+         values(#{id},#{appversion},#{phone_type},#{imei},#{osversion},#{lang},#{client_type},#{date},#{appid},#{httpcount},#{timestamp})
    </insert>
    
    <update id="update" parameterType="PhoneUser">

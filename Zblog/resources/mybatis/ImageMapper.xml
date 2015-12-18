@@ -5,7 +5,7 @@
 <mapper namespace="com.zblog.core.dal.mapper.ImageMapper">
    
     <sql id="select_statements">
-        cata_id,title, pageNum,thumbNail,width,height,imgPaths,srcImgPaths,yunImgPaths,thumbSrc,thumbYun,updateed_at
+        iid,cata_id,title, pageNum,thumbNail,width,height,imgPaths,srcImgPaths,yunImgPaths,thumbSrc,thumbYun,updateed_at
     </sql>
     
    <select id="loadByIntId" parameterType="java.lang.Integer" resultType="Image">
@@ -21,6 +21,11 @@
    <select id="getImageListBySearch" parameterType="PageModel" resultType="Image">
        select <include refid="select_statements"/> from image left join appcolumn on image.cata_id=appcolumn.cataid 
        where appcolumn.appid=#{query.appid} and appcolumn.enable=1 and image.title like #{query.keyname} and updateed_at &lt;= <![CDATA[DATE_FORMAT(#{query.timestamp},'%Y-%m-%d %H:%m:%s')]]>
+   	   order by updateed_at desc
+   </select>
+   <select id="getFavorImageList" parameterType="PageModel" resultType="Image">
+       select <include refid="select_statements"/> from image,favor_img
+       where favor_img.imei=#{query.imei} and favor_img.favorId=image.iid and favor_img.enable=1
    	   order by updateed_at desc
    </select>
    

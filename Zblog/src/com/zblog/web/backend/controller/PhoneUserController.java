@@ -12,19 +12,21 @@
 
 package com.zblog.web.backend.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zblog.core.dal.entity.PhoneUser;
+import com.zblog.core.util.StringCompress;
+import com.zblog.service.FavorService;
 import com.zblog.service.PhoneUserService;
 
 /**
@@ -44,26 +46,29 @@ public class PhoneUserController {
 	
 	// 客户端上传登陆启动等详细信息
 	@RequestMapping(value="/updateInfo", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
-	public void postPhoneUserInfo(){
-//		headers.put("appid", AppConstant.APPID+"");
-//		headers.put("osversion", android.os.Build.VERSION.RELEASE+"");
-//		headers.put("client_type", "android");
-//		headers.put("imei",SystemTool.getPhoneIMEI(this)); //手机序列号
-//		headers.put("lang",SystemTool.getLang(this)); //手机语言
-//		headers.put("phone_type", android.os.Build.MODEL);	// 手机型号
-//		headers.put("timestamp", SystemTool.getTimeStamp()+""); //时间戳　可用于判断是否是同一次启动\
-//		PhoneUser phoneUser = new PhoneUser();
-//		phoneUser.setAppid(Integer.parseInt(headers.getFirst("appid")));
-//		phoneUser.setAppversion(Integer.parseInt(headers.getFirst("")));
-//		phoneUser.setCreateTime(new Date());
-//		phoneUser.setImei(headers.getFirst("imei"));
-//		phoneUser.setOsversion(headers.getFirst("osversion"));
-//		phoneUser.setLang(headers.getFirst("lang"));
-//		phoneUser.setPhone_type(headers.getFirst("phone_type"));
-//		phoneUser.setTimestamp(headers.getFirst("timestamp"));
-//		phoneUser.setClient_type(headers.getFirst("client_type"));
-		phoneUserService.loadById("1");
+	@ResponseBody
+	public String postPhoneUserInfo(@RequestHeader HttpHeaders headers){
+		PhoneUser phoneUser = new PhoneUser();
+		phoneUser.setAppid(Integer.parseInt(headers.getFirst("appid")));
+		phoneUser.setAppversion(headers.getFirst("appversion")+"");
+		phoneUser.setDate(new Date());
+		phoneUser.setImei(headers.getFirst("imei")+"");
+		phoneUser.setOsversion(headers.getFirst("osversion"));
+		phoneUser.setLang(headers.getFirst("lang"));
+		phoneUser.setPhone_type(headers.getFirst("phone_type"));
+		phoneUser.setTimestamp(headers.getFirst("timestamp"));
+		phoneUser.setClient_type(headers.getFirst("client_type"));
+		
+		phoneUser.setAddress(decodeUtf8(headers.getFirst("address")));
+		phoneUser.setCity(decodeUtf8(headers.getFirst("city")));
+		phoneUser.setCountry(decodeUtf8(headers.getFirst("country")));
+		phoneUser.setDistrict(decodeUtf8(headers.getFirst("district")));
+		phoneUser.setProvince(decodeUtf8(headers.getFirst("province")));
+		phoneUser.setLatitude(headers.getFirst("latitude"));
+		phoneUser.setLongitude(headers.getFirst("longitude"));
+		phoneUser.setChannel(decodeUtf8(headers.getFirst("channel")));
 		System.out.println("ssssssssssssssssssss");
+		return StringCompress.compress(phoneUserService.insert(phoneUser)+"");
 	}
 	
 	// 收藏信息
@@ -76,7 +81,16 @@ public class PhoneUserController {
 		
 	}
 	
-	
+	private String decodeUtf8(String str){
+		try {
+			if(!"".equals(str)){
+				str = URLDecoder.decode(str,"UTF-8");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return str;
+	}
 	
 }
 

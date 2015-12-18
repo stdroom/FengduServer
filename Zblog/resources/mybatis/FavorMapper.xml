@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zblog.core.dal.mapper.FavorMapper">
+   
+    <sql id="select_statements">
+        imei,favorId,createTime,enable,appid,readed
+    </sql>
+
+   <select id="findFavorByImeiImgId" parameterType="Favor" resultType="Favor">
+       select <include refid="select_statements"/> from favor_img where 
+       imei=#{imei} and appid=#{appid} and favorId=#{favorId}
+   </select>
+   
+   <insert id="insertFavor" parameterType="Favor">
+      insert into favor_img(<include refid="select_statements"/>) 
+         values(#{imei},#{favorId},#{createTime},#{enable},#{appid},#{readed})
+   </insert>
+   
+   <update id="updateFavor" parameterType="Favor">
+     update favor_img set enable=#{enable} ,readed=#{readed},reported=#{reported}
+     where imei=#{imei} and appid=#{appid} and favorId=#{favorId}
+   </update>
+</mapper>
