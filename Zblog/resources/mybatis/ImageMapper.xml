@@ -5,7 +5,7 @@
 <mapper namespace="com.zblog.core.dal.mapper.ImageMapper">
    
     <sql id="select_statements">
-        iid,cata_id,title, pageNum,thumbNail,width,height,imgPaths,srcImgPaths,yunImgPaths,thumbSrc,thumbYun,updateed_at
+        iid,cata_id,title, pageNum,thumbNail,width,height,imgPaths,srcImgPaths,yunImgPaths,thumbSrc,thumbYun,updateed_at,thumbWidth,thumbHeight
     </sql>
     
    <select id="loadByIntId" parameterType="java.lang.Integer" resultType="Image">

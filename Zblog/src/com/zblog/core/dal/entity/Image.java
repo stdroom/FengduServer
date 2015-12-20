@@ -64,6 +64,9 @@ public class Image extends BaseEntity{
 	private Integer width = 0;
 	private Integer height = 0;
 	
+	private Integer thumbWidth = 0;
+	private Integer thumbHeight=0;
+	
 	private Integer zan = 0;
 	private Integer favor = 0;
 	
@@ -269,5 +272,20 @@ public class Image extends BaseEntity{
 		this.iid = iid;
 	}
 
+	public Integer getThumbWidth() {
+		return thumbWidth;
+	}
+
+	public void setThumbWidth(Integer thumbWidth) {
+		this.thumbWidth = thumbWidth;
+	}
+
+	public Integer getThumbHeight() {
+		return thumbHeight;
+	}
+
+	public void setThumbHeight(Integer thumbHeight) {
+		this.thumbHeight = thumbHeight;
+	}
 }
 
