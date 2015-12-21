@@ -17,6 +17,8 @@
     <typeAlias alias="Image" type="com.zblog.core.dal.entity.Image" />
     <typeAlias alias="PhoneUser" type="com.zblog.core.dal.entity.PhoneUser" />
     <typeAlias alias="Favor" type="com.zblog.core.dal.entity.Favor"/>
+    <typeAlias alias="Welcome" type="com.zblog.core.dal.entity.Welcome"/>
+    <typeAlias alias="AppUpdate" type="com.zblog.core.dal.entity.AppUpdate"/>
     
     <typeAlias alias="PostVO" type="com.zblog.service.vo.PostVO" />
     <typeAlias alias="PageVO" type="com.zblog.service.vo.PageVO" />

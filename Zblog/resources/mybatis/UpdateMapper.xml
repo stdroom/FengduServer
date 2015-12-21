@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zblog.core.dal.mapper.AppUpdateMapper">
+   
+    <sql id="select_statements">
+        appid,versionCode,versionName,downloadUrl,updateLog,simpleLog,updateLevel;
+    </sql>
+
+   <select id="findAppUpdateByAppid" parameterType="int" resultType="AppUpdate">
+       select <include refid="select_statements"/> from app_update where 
+       appid=#{appid}
+   </select>
+   
+   <insert id="insertAppUpdate" parameterType="AppUpdate">
+      insert into favor_img(<include refid="select_statements"/>) 
+         values(#{imei},#{favorId},#{createTime},#{enable},#{appid},#{readed})
+   </insert>
+   
+   <update id="updateAppUpdate" parameterType="AppUpdate">
+     update favor_img set enable=#{enable} ,readed=#{readed},reported=#{reported}
+     where imei=#{imei} and appid=#{appid} and favorId=#{favorId}
+   </update>
+</mapper>
