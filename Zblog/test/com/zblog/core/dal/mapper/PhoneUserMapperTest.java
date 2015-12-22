@@ -22,6 +22,7 @@ import org.junit.Before;
 import com.zblog.core.dal.entity.Image;
 import com.zblog.core.dal.entity.PhoneUser;
 import com.zblog.core.dal.entity.User;
+import com.zblog.core.dal.entity.Welcome;
 import com.zblog.core.plugin.PageModel;
 
 import junit.framework.TestCase;
@@ -50,34 +51,41 @@ private SqlSessionFactory sqlSessionFactionFactory;
 		}
 	}
 	
-	public void testLoadById() {
+//	public void testLoadById() {
+//		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
+//		PhoneUserMapper userMapper = sqlSession.getMapper(PhoneUserMapper.class);
+//		int i = 1;
+//		PhoneUser phoneUser = new PhoneUser();
+//		phoneUser.setIid(6);
+//		phoneUser.setId("2");
+//		phoneUser.setAppid(233);
+//		phoneUser.setAppversion("233");
+//		phoneUser.setDate(new Date());
+//		phoneUser.setImei("imei");
+//		phoneUser.setOsversion("osversion");
+//		phoneUser.setLang("as");
+//		phoneUser.setPhone_type("android");
+//		phoneUser.setTimestamp("asd");
+//		phoneUser.setClient_type("ad");
+//		phoneUser.setHttpcount(23);
+//		userMapper.insert(phoneUser);
+//		sqlSession.commit();
+//		PhoneUser user = userMapper.loadByPhoneUser(5);
+//		System.out.println(user.getClient_type()
+//				+"\n"+user.getImei()
+//				+"\n"+user.getPhone_type()
+//				+"\n"+user.getAppid()
+//				);
+//		assertEquals(user.getAppid(), new Integer(233));
+//	}
+	
+	public void testWelcome(){
 		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
-		PhoneUserMapper userMapper = sqlSession.getMapper(PhoneUserMapper.class);
-		int i = 1;
-		PhoneUser phoneUser = new PhoneUser();
-		phoneUser.setIid(6);
-		phoneUser.setId("2");
-		phoneUser.setAppid(233);
-		phoneUser.setAppversion("233");
-		phoneUser.setDate(new Date());
-		phoneUser.setImei("imei");
-		phoneUser.setOsversion("osversion");
-		phoneUser.setLang("as");
-		phoneUser.setPhone_type("android");
-		phoneUser.setTimestamp("asd");
-		phoneUser.setClient_type("ad");
-		phoneUser.setHttpcount(23);
-		userMapper.insert(phoneUser);
-		sqlSession.commit();
-		PhoneUser user = userMapper.loadByPhoneUser(5);
-		System.out.println(user.getClient_type()
-				+"\n"+user.getImei()
-				+"\n"+user.getPhone_type()
-				+"\n"+user.getAppid()
-				);
-		assertEquals(user.getAppid(), new Integer(233));
+		WelcomeMapper welcomeMapper = sqlSession.getMapper(WelcomeMapper.class);
+		Welcome welcomeBean = welcomeMapper.findWelcomeByAppid(102601);
+		assertEquals(welcomeBean.getDefaultImgUrl(),"as");
 	}
-//
+	
 //	public void testListPageModelOfT() {
 //		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
 //		ImageMapper userMapper = sqlSession.getMapper(ImageMapper.class);
@@ -95,5 +103,6 @@ private SqlSessionFactory sqlSessionFactionFactory;
 //		}
 //		
 //	}
+	
 }
 

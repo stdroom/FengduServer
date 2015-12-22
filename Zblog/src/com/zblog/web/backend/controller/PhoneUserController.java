@@ -24,10 +24,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
+import com.zblog.core.dal.entity.AppUpdate;
 import com.zblog.core.dal.entity.PhoneUser;
+import com.zblog.core.dal.entity.Welcome;
 import com.zblog.core.util.StringCompress;
+import com.zblog.service.AppUpdateService;
 import com.zblog.service.FavorService;
 import com.zblog.service.PhoneUserService;
+import com.zblog.service.WelcomeService;
 
 /**
  * 类名: PhoneUserController <br/>
@@ -43,6 +48,10 @@ public class PhoneUserController {
 	
 	@Autowired
 	PhoneUserService phoneUserService;
+	@Autowired
+	WelcomeService welcomeService;
+	@Autowired
+	AppUpdateService appUpdateService;
 	
 	// 客户端上传登陆启动等详细信息
 	@RequestMapping(value="/updateInfo", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
@@ -92,5 +101,36 @@ public class PhoneUserController {
 		return str;
 	}
 	
+	// app 获取版本更新信息
+	@RequestMapping(value="/upgradeInfo", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String getAppUpdateInfo(@RequestHeader HttpHeaders headers){
+		if(headers.containsKey("appid")){
+			AppUpdate update = appUpdateService.findAppUpdateByAppid(Integer.parseInt(headers.getFirst("appid")));
+			if(update!=null){
+				return StringCompress.compress(JSONObject.toJSONString(update));
+			}else{
+				return "";
+			}
+		}else{
+			return "";
+		}
+	}
+	
+	// app 获取首页信息
+	@RequestMapping(value="/welcomeInfo", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String getWelcomeInfo(@RequestHeader HttpHeaders headers){
+		if(headers.containsKey("appid")){
+			Welcome welcome = welcomeService.findWelcomeByAppid(Integer.parseInt(headers.getFirst("appid")));
+			if(welcome!=null){
+				return StringCompress.compress(JSONObject.toJSONString(welcome));
+			}else{
+				return "";
+			}
+		}else{
+			return "";
+		}
+	}
 }
 
