@@ -19,6 +19,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 
+import com.zblog.core.dal.entity.AppUpdate;
 import com.zblog.core.dal.entity.Image;
 import com.zblog.core.dal.entity.PhoneUser;
 import com.zblog.core.dal.entity.User;
@@ -81,9 +82,9 @@ private SqlSessionFactory sqlSessionFactionFactory;
 	
 	public void testWelcome(){
 		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
-		WelcomeMapper welcomeMapper = sqlSession.getMapper(WelcomeMapper.class);
-		Welcome welcomeBean = welcomeMapper.findWelcomeByAppid(102601);
-		assertEquals(welcomeBean.getDefaultImgUrl(),"as");
+		AppUpdateMapper welcomeMapper = sqlSession.getMapper(AppUpdateMapper.class);
+		AppUpdate welcomeBean = welcomeMapper.findAppUpdateByAppid(102601);
+		assertEquals(welcomeBean.getVersionCode(),2);
 	}
 	
 //	public void testListPageModelOfT() {

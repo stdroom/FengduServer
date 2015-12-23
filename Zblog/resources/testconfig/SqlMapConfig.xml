@@ -79,6 +79,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <mapper resource="mybatis/ImageMapper.xml" />
 	<mapper resource="mybatis/PhoneUserMapper.xml" />
 	<mapper resource="mybatis/FavorMapper.xml" />
+	<mapper resource="mybatis/WelcomeMapper.xml"/>
+	<mapper resource="mybatis/UpdateMapper.xml"/>
 		<!--通过resource方法一次加载一个映射文件 -->
 		<!-- <mapper resource="mapper/UserMapper.xml"/> -->
 		

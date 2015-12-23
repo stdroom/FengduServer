@@ -37,5 +37,7 @@
     <mapper resource="mybatis/ImageMapper.xml" />
     <mapper resource="mybatis/PhoneUserMapper.xml" />
     <mapper resource="mybatis/FavorMapper.xml"/>
+    <mapper resource="mybatis/WelcomeMapper.xml"/>
+	<mapper resource="mybatis/UpdateMapper.xml"/>
   </mappers>
 </configuration>

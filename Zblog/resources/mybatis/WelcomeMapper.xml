@@ -5,7 +5,7 @@
 <mapper namespace="com.zblog.core.dal.mapper.WelcomeMapper">
    
     <sql id="select_statements">
-        appid,welecomImgUrl,welcomShowDate,welcomeSeconds,defaultImgUrl,defaultSeconds,showAds,showAdRate,
+        appid,welcomeImgUrl,welcomeShowDate,welcomeSeconds,defaultImgUrl,defaultSeconds,showAds,showAdRate,
         isWelcomeFullScreen,isDefaultFullScreen
     </sql>
 

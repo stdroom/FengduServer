@@ -15,6 +15,7 @@ package com.zblog.web.backend.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -105,32 +106,38 @@ public class PhoneUserController {
 	@RequestMapping(value="/upgradeInfo", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String getAppUpdateInfo(@RequestHeader HttpHeaders headers){
+		HashMap<String,Object> map = new HashMap<String,Object>();
 		if(headers.containsKey("appid")){
 			AppUpdate update = appUpdateService.findAppUpdateByAppid(Integer.parseInt(headers.getFirst("appid")));
 			if(update!=null){
-				return StringCompress.compress(JSONObject.toJSONString(update));
+				map.put("status", "1");
+				map.put("results", update);
 			}else{
-				return "";
+				map.put("status", "0");
 			}
 		}else{
-			return "";
+			map.put("status", "0");
 		}
+		return StringCompress.compress(JSONObject.toJSONString(map));
 	}
 	
 	// app 获取首页信息
 	@RequestMapping(value="/welcomeInfo", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String getWelcomeInfo(@RequestHeader HttpHeaders headers){
+		HashMap<String,Object> map = new HashMap<String,Object>();
 		if(headers.containsKey("appid")){
 			Welcome welcome = welcomeService.findWelcomeByAppid(Integer.parseInt(headers.getFirst("appid")));
 			if(welcome!=null){
-				return StringCompress.compress(JSONObject.toJSONString(welcome));
+				map.put("status", "1");
+				map.put("results", welcome);
 			}else{
-				return "";
+				map.put("status", "0");
 			}
 		}else{
-			return "";
+			map.put("status", "0");
 		}
+		return StringCompress.compress(JSONObject.toJSONString(map));
 	}
 }
 

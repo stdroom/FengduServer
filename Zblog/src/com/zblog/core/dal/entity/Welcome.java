@@ -26,9 +26,9 @@ public class Welcome {
 
 	private Integer appid;
 	// 显示欢迎页的图片地址
-	private String welecomImgUrl;
+	private String welcomeImgUrl;
 	// 显示欢迎页的日期
-	private Date welcomShowDate;
+	private Date welcomeShowDate;
 	// 显示欢迎页的秒数
 	private int welcomeSeconds;
 	// 默认欢迎页
@@ -44,17 +44,17 @@ public class Welcome {
 	// 默认欢迎页是否全屏
 	private Boolean isDefaultFullScreen;
 	
-	public String getWelecomImgUrl() {
-		return welecomImgUrl;
+	public String getWelcomeImgUrl() {
+		return welcomeImgUrl;
 	}
-	public void setWelecomImgUrl(String welecomImgUrl) {
-		this.welecomImgUrl = welecomImgUrl;
+	public void setWelcomeImgUrl(String welcomeImgUrl) {
+		this.welcomeImgUrl = welcomeImgUrl;
 	}
-	public Date getWelcomShowDate() {
-		return welcomShowDate;
+	public Date getWelcomeShowDate() {
+		return welcomeShowDate;
 	}
-	public void setWelcomShowDate(Date welcomShowDate) {
-		this.welcomShowDate = welcomShowDate;
+	public void setWelcomeShowDate(Date welcomeShowDate) {
+		this.welcomeShowDate = welcomeShowDate;
 	}
 	public int getWelcomeSeconds() {
 		return welcomeSeconds;
@@ -104,5 +104,7 @@ public class Welcome {
 	public void setAppid(Integer appid) {
 		this.appid = appid;
 	}
+	
+	
 }
 

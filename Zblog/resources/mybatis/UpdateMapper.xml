@@ -5,7 +5,7 @@
 <mapper namespace="com.zblog.core.dal.mapper.AppUpdateMapper">
    
     <sql id="select_statements">
-        appid,versionCode,versionName,downloadUrl,updateLog,simpleLog,updateLevel;
+        appid,versionCode,versionName,downloadUrl,updateLog,simpleLog,updateLevel
     </sql>
 
    <select id="findAppUpdateByAppid" parameterType="int" resultType="AppUpdate">
