@@ -50,6 +50,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAlias alias="Favor" type="com.zblog.core.dal.entity.Favor"/>
 	<typeAlias alias="Welcome" type="com.zblog.core.dal.entity.Welcome"/>
     <typeAlias alias="AppUpdate" type="com.zblog.core.dal.entity.AppUpdate"/>
+    <typeAlias alias="SearchWord" type="com.zblog.core.dal.entity.SearchWord"/>
 	</typeAliases>
 	
 	<!-- 和spring整合后 environments配置将废除-->
@@ -81,6 +82,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mapper resource="mybatis/FavorMapper.xml" />
 	<mapper resource="mybatis/WelcomeMapper.xml"/>
 	<mapper resource="mybatis/UpdateMapper.xml"/>
+	<mapper resource="mybatis/SearchWordMapper.xml"/>
 		<!--通过resource方法一次加载一个映射文件 -->
 		<!-- <mapper resource="mapper/UserMapper.xml"/> -->
 		

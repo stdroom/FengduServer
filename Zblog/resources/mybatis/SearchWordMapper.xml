@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zblog.core.dal.mapper.SearchWordMapper">
+   
+    <sql id="select_statements">
+        appid,imei,word,searchTime,resultCount,enable
+    </sql>
+
+   <select id="getSearchWords" parameterType="int" resultType="SearchWord">
+       select <include refid="select_statements"/> from search where 
+       appid=#{appid} and enable=1 and resultCount&gt;0 group by word order by searchTime desc limit 30
+   </select>
+   
+   <insert id="insertSearch" parameterType="SearchWord">
+      insert into search(<include refid="select_statements"/>)
+         values(#{appid},#{imei},#{word},#{searchTime},#{resultCount},#{enable})
+   </insert>
+   
+</mapper>

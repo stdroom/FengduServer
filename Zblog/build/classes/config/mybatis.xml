@@ -19,6 +19,7 @@
     <typeAlias alias="Favor" type="com.zblog.core.dal.entity.Favor"/>
     <typeAlias alias="Welcome" type="com.zblog.core.dal.entity.Welcome"/>
     <typeAlias alias="AppUpdate" type="com.zblog.core.dal.entity.AppUpdate"/>
+    <typeAlias alias="SearchWord" type="com.zblog.core.dal.entity.SearchWord"/>
     
     <typeAlias alias="PostVO" type="com.zblog.service.vo.PostVO" />
     <typeAlias alias="PageVO" type="com.zblog.service.vo.PageVO" />
@@ -39,5 +40,6 @@
     <mapper resource="mybatis/FavorMapper.xml"/>
     <mapper resource="mybatis/WelcomeMapper.xml"/>
 	<mapper resource="mybatis/UpdateMapper.xml"/>
+	<mapper resource="mybatis/SearchWordMapper.xml"/>
   </mappers>
 </configuration>

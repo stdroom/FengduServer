@@ -22,6 +22,7 @@ import org.junit.Before;
 import com.zblog.core.dal.entity.AppUpdate;
 import com.zblog.core.dal.entity.Image;
 import com.zblog.core.dal.entity.PhoneUser;
+import com.zblog.core.dal.entity.SearchWord;
 import com.zblog.core.dal.entity.User;
 import com.zblog.core.dal.entity.Welcome;
 import com.zblog.core.plugin.PageModel;
@@ -82,10 +83,11 @@ private SqlSessionFactory sqlSessionFactionFactory;
 	
 	public void testWelcome(){
 		SqlSession sqlSession = sqlSessionFactionFactory.openSession();
-		AppUpdateMapper welcomeMapper = sqlSession.getMapper(AppUpdateMapper.class);
-		AppUpdate welcomeBean = welcomeMapper.findAppUpdateByAppid(102601);
-		assertEquals(welcomeBean.getVersionCode(),2);
-	}
+		SearchWordMapper welcomeMapper = sqlSession.getMapper(SearchWordMapper.class);
+		ArrayList<SearchWord> welcomeBean = welcomeMapper.getSearchWords(102601);
+		
+		assertEquals(welcomeBean.size(),3);
+	}	
 	
 //	public void testListPageModelOfT() {
 //		SqlSession sqlSession = sqlSessionFactionFactory.openSession();

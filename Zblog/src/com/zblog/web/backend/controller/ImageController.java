@@ -29,10 +29,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.zblog.core.dal.entity.Favor;
 import com.zblog.core.dal.entity.Image;
+import com.zblog.core.dal.entity.SearchWord;
 import com.zblog.core.plugin.PageModel;
 import com.zblog.core.util.StringCompress;
 import com.zblog.service.FavorService;
 import com.zblog.service.ImageService;
+import com.zblog.service.SearchWordService;
 
 /**
  * 类名: ImageController <br/>
@@ -51,6 +53,9 @@ public class ImageController {
 	
 	@Autowired
 	FavorService favorService;
+	
+	@Autowired
+	SearchWordService searchWordService;
 	
 	@RequestMapping(value="/getImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
 	@ResponseBody
@@ -79,9 +84,9 @@ public class ImageController {
 	
 	@RequestMapping(value="/searchImage", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String searchImages(@RequestHeader("appid") String appid,@RequestParam("keyname") String keyname, @RequestParam("page") int page,@RequestParam("pageSize") int pageSize){
+	public String searchImages(@RequestHeader HttpHeaders headers,@RequestParam("keyname") String keyname, @RequestParam("page") int page,@RequestParam("pageSize") int pageSize){
 		PageModel<Image> pageModel = imageService.list(page, pageSize);
-		pageModel.insertQuery("appid", Integer.parseInt(appid));
+		pageModel.insertQuery("appid", Integer.parseInt(headers.getFirst("appid")));
 		pageModel.insertQuery("timestamp",new Date());
 		System.out.println(new Date());
 	    try {
@@ -98,6 +103,16 @@ public class ImageController {
 			System.out.println(ben.getCata_id());
 		}
 		map.put("status", 1);
+		if(page <=1){	// 第一次请求时 插入
+			SearchWord search = new SearchWord();
+			search.setAppid(Integer.parseInt(headers.getFirst("appid")));
+			search.setImei(headers.getFirst("imei"));
+			search.setSearchTime(new Date());
+			search.setWord(keyname);
+			search.setEnable(true);
+			search.setResultCount((int) pageModel.getTotalCount());
+			searchWordService.insertSearch(search);
+		}
 		if(list== null || list.size()==0){
 			map.put("size", 0);
 		}else{
@@ -188,6 +203,23 @@ public class ImageController {
 		
 		map.put("data", list);
 		return StringCompress.compress(JSON.toJSONString(map));
+	}
+	
+	@RequestMapping(value="/keywordsSearch", method = {RequestMethod.GET},produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String getKeySearchWords(@RequestHeader HttpHeaders headers){
+		
+		ArrayList<SearchWord> searchWord = searchWordService.getSearchWords(Integer.parseInt(headers.getFirst("appid")));
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(searchWord == null){
+			map.put("status", 0);
+			map.put("results", null);
+			return StringCompress.compress(JSON.toJSONString(map));
+		}else{
+			map.put("status", 200);
+			map.put("results", searchWord);
+			return StringCompress.compress(JSON.toJSONString(map));
+		}
 	}
 }
 
