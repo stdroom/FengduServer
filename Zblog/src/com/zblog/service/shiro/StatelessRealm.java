@@ -16,8 +16,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import com.zblog.core.dal.entity.User;
 import com.zblog.core.plugin.ApplicationContextUtil;
+import com.zblog.core.dal.entity.User;
 import com.zblog.service.UserService;
 
 /**

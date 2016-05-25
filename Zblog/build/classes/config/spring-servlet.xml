@@ -33,12 +33,12 @@
   
   <bean class="com.zblog.web.support.XssHandlerMappingPostProcessor" />
   
-  <!-- 定义无需Controller的url<->view直接映射  
+  <!-- 定义无需Controller的url<->view直接映射  -->
     <mvc:resources mapping="/resource/**" location="/resource/" />
     <mvc:resources mapping="/post/**" location="/post/" />
     
     <mvc:view-controller path="/backend" view-name="/backend/login" />
-   -->
+   
    
   <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
     <property name="contentNegotiationManager">
